@@ -9,14 +9,15 @@ terraform {
 }
 
 provider "aws" {
-  profile = "default"
-  region = "ap-south-1"
+  profile = "default"   //loged in aws account
+  region = "ap-south-1"  //aws region
 }
 
 resource "aws_instance" "firstinstance"{
-    ami = "ami-02b8269d5e85954ef"
-    instance_type = "t3.micro"
+    ami = "ami-02b8269d5e85954ef"   //EC2 AMI to lunch
+    instance_type = "t3.micro"     //EC2 type
     tags = {
-        description = "web_Server"
+        "Name" = "web_Server"  //description of EC2
     }
+    user_data = file("${path.module}/app.sh")
 }
